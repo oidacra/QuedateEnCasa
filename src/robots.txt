@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://quedatepty.web.app/sitemap.xml

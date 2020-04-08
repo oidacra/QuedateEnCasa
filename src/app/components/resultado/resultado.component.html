@@ -1,0 +1,18 @@
+<div class="alert alert-success message mt-4" role="alert">
+  <h2>
+    Puedes comprar desde las: <span>{{ rule.schedule.hour | hours }}</span>
+  </h2>
+  <p>
+    Puedes salir desde las <span>{{ rule.schedule.from | hours }}</span> y debes
+    estar en tu casa a las <span>{{ rule.schedule.to | hours }}</span>
+  </p>
+  <h4>
+    Los días:
+    <span *ngFor="let day of rule.days; let i = index"> {{ day }},</span>
+  </h4>
+</div>
+
+<p>
+  Recuerda este es un horario para hacer justo lo necesario como comprar comida,
+  medicamentos y/o gestiones bancarias.
+</p>

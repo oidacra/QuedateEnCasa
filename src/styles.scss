@@ -1,0 +1,77 @@
+//Required
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+//Extra
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/images";
+
+@import "~@angular/material/theming";
+@include mat-core();
+
+
+$md-quedate: (
+    50 : #e4e7ec,
+    100 : #bcc3d0,
+    200 : #909bb0,
+    300 : #647390,
+    400 : #425579,
+    500 : #213761,
+    600 : #1d3159,
+    700 : #182a4f,
+    800 : #142345,
+    900 : #0b1633,
+    A100 : #6e8eff,
+    A200 : #3b66ff,
+    A400 : #083eff,
+    A700 : #0034ee,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+
+
+
+
+$my-app-primary: mat-palette($md-quedate);
+$my-app-accent: mat-palette($mat-pink, 500, 900, A100);
+$my-app-warn: mat-palette($mat-deep-orange);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);
+.alternate-theme {
+  $alternate-primary: mat-palette($mat-light-blue);
+  $alternate-accent: mat-palette($mat-yellow, 400);
+  $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
+  @include angular-material-theme($alternate-theme);
+}
+
+html,
+body {
+  min-height: 100vh;
+
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.flex-grow {
+   flex: 1;
+}
