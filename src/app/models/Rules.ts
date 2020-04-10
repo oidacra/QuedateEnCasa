@@ -1,5 +1,6 @@
 export interface IRules {
   groupName: string;
+  label: string;
   ageRange: Range;
   strict: boolean;
   rules: Rule[];

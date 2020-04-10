@@ -9,26 +9,20 @@
       class="img-fluid"
       alt="Responsive image"
     />
-    <div class="p-4 ">
+    <div class="p-4">
       <p>
         #QuédateEnCasa Panamá 🇵🇦. Aquí podrás verificar en qué horario te
         corresponde salir. Sólo llena los campos indicados y sabrás qué día de
         la semana y hora te corresponde.
       </p>
 
-      <h2 class="pt-3">¿Cuál es tu edad?</h2>
-      <mat-form-field>
-        <mat-label>Selecciona tu edad</mat-label>
-        <mat-select
-          [(ngModel)]="selectedAge"
-          name="age"
-          (selectionChange)="resetAll()"
+      <h2 class="pt-3">Selecciona tu rango de edad</h2>
+      <mat-button-toggle-group [(ngModel)]="selectedGroup" (change)="resetAll()">
+        <mat-button-toggle *ngFor="let val of ages" value="{{ val.value }}">{{
+          val.label
+        }}</mat-button-toggle
         >
-          <mat-option *ngFor="let age of ages" [value]="age">
-            {{ age }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      </mat-button-toggle-group>
 
       <h2 class="pt-3">Selecciona tu género</h2>
       <mat-button-toggle-group
@@ -42,11 +36,10 @@
         >
       </mat-button-toggle-group>
 
-      <div
-        *ngIf="selectedAge <= 60"
-
-      >
-        <h2 class="mt-4">¿Cuál es el último número de tu cédula o pasaporte?</h2>
+      <div *ngIf="selectedGroup === 'group-1'">
+        <h2 class="mt-4">
+          ¿Cuál es el último número de tu cédula o pasaporte?
+        </h2>
 
         <mat-button-toggle-group
           [(ngModel)]="selectedNumber"
@@ -62,9 +55,6 @@
       </div>
 
       <app-resultado *ngIf="rule" [rule]="rule"></app-resultado>
-
-
-
     </div>
   </div>
 </main>

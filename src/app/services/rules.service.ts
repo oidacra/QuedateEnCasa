@@ -4,7 +4,7 @@ import * as _ from 'underscore';
 import { IRules, IDaysAllowed, Rule } from '../models/Rules';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RulesService {
   private __MINUTES_ALLOWED_BEFORE = 30;
@@ -14,12 +14,13 @@ export class RulesService {
   // Rule by gender
   private __DAY_ALLOWED_BY_GENTER: IDaysAllowed[] = [
     { gender: 'Hombre', dayAllowed: ['martes', 'jueves'] }, // martes, jueves, sabado
-    { gender: 'Mujer', dayAllowed: ['lunes', 'miércoles', 'viernes'] } // lunes, miercoles, viernes
+    { gender: 'Mujer', dayAllowed: ['lunes', 'miércoles', 'viernes'] }, // lunes, miercoles, viernes
   ];
   // Rules
   private __GROUP_AGE: IRules[] = [
     {
-      groupName: 'Grupo A',
+      groupName: 'group-1',
+      label: 'De 18 a 59 años',
       ageRange: { from: 18, to: 59 },
       strict: false,
       rules: [
@@ -32,44 +33,60 @@ export class RulesService {
         { number: 6, hoursAllowed: { from: 18 } },
         { number: 7, hoursAllowed: { from: 7 } },
         { number: 8, hoursAllowed: { from: 8 } },
-        { number: 9, hoursAllowed: { from: 9 } }
-      ]
+        { number: 9, hoursAllowed: { from: 9 } },
+      ],
     },
     {
-      groupName: 'Grupo B',
+      groupName: 'group-2',
+      label: 'Más de 60 años',
       ageRange: { from: 60, to: 102 },
       strict: true,
-      rules: [{ hoursAllowed: { from: 11, to: 13 } }]
-    }
+      rules: [{ hoursAllowed: { from: 11, to: 13 } }],
+    },
   ];
-
-  public getRule(age: number, selectedGener: string, selectedNumber?: number) {
+  public getListRules() {
+    return _.map(this.__GROUP_AGE, (val) => {
+      return { value: val.groupName, label: val.label };
+    });
+  }
+  public getRule(
+    selectedGroup: string,
+    selectedGender: string,
+    selectedNumber?: number
+  ) {
     let hoursOut;
-    const ruleByAge: IRules = this.__getRule(age);
+    const ruleByAge: IRules = this.__getRule(selectedGroup);
 
-    if (ruleByAge.strict === false) {
-      hoursOut = _.find(ruleByAge.rules, val => {
+    if (ruleByAge.strict === false && selectedNumber !== undefined) {
+      hoursOut = _.find(ruleByAge.rules, (val) => {
         return val.number == selectedNumber;
       });
-    } else {
+    }
+
+    if (ruleByAge.strict === true && selectedNumber === undefined) {
       hoursOut = _.first(ruleByAge.rules);
     }
 
-    return {
-      schedule: this.__fixHoursAllowed(ruleByAge.strict, hoursOut),
-      days: this.__getWeekDayByGender(selectedGener).join(', ')
-    };
+    if(hoursOut !== undefined){
+      return {
+        schedule: this.__fixHoursAllowed(ruleByAge.strict, hoursOut),
+        days: this.__getWeekDayByGender(selectedGender).join(', '),
+      };
+    }
+
+    return false;
+    
   }
 
   // Obtengo la regla segun edad y fin de cédula
-  private __getRule(age: number) {
-    return _.find(this.__GROUP_AGE, group => {
-      return group.ageRange.from <= age && group.ageRange.to >= age;
+  private __getRule(selectedGroup: string) {
+    return _.find(this.__GROUP_AGE, (group) => {
+      return group.groupName === selectedGroup;
     });
   }
 
   private __getWeekDayByGender(gender) {
-    const daysByGender = _.filter(this.__DAY_ALLOWED_BY_GENTER, weekDays => {
+    const daysByGender = _.filter(this.__DAY_ALLOWED_BY_GENTER, (weekDays) => {
       return weekDays.gender === gender;
     });
     return daysByGender[0].dayAllowed;
@@ -83,7 +100,7 @@ export class RulesService {
       return {
         from: hour.hoursAllowed.from + ':00',
         hour: hour.hoursAllowed.from + ':00',
-        to: hour.hoursAllowed.to + ':00'
+        to: hour.hoursAllowed.to + ':00',
       };
     } else {
       // Convert to minutes
@@ -108,7 +125,7 @@ export class RulesService {
       return {
         from: fromHour,
         hour: hour.hoursAllowed.from + ':00',
-        to: toHour
+        to: toHour,
       };
     }
   }

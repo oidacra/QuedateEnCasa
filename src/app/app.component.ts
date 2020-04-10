@@ -7,14 +7,14 @@ import { RulesService } from './services/rules.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'QuedateApp';
 
   selectedGender: string;
   selectedNumber: number;
-  selectedAge: number;
+  selectedGroup: string;
   disabledNumbers = true;
 
   selected;
@@ -24,27 +24,18 @@ export class AppComponent {
   genders = ['Hombre', 'Mujer'];
   endNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  ages = _.range(18, 103);
+  ages = this.rulesService.getListRules();
 
   constructor(private rulesService: RulesService) {}
 
   inputsChange() {
     this.disabledNumbers = false;
 
-    if (this.selectedAge > 59) {
-      this.rule = this.rulesService.getRule(
-        this.selectedAge,
-        this.selectedGender
-      );
-    }
-
-    if (this.selectedNumber) {
-      this.rule = this.rulesService.getRule(
-        this.selectedAge,
-        this.selectedGender,
-        this.selectedNumber
-      );
-    }
+    this.rule = this.rulesService.getRule(
+      this.selectedGroup,
+      this.selectedGender,
+      this.selectedNumber
+    );
   }
 
   resetAll() {
