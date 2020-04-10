@@ -11,12 +11,12 @@
     />
     <div class="p-4 ">
       <p>
-        #QuédateEnCasa Panamá 🇵🇦, aquí podrás verificar qué horario te
-        corresponde salir, solo llena los campos indicados y sabrás que día de
+        #QuédateEnCasa Panamá 🇵🇦. Aquí podrás verificar en qué horario te
+        corresponde salir. Sólo llena los campos indicados y sabrás qué día de
         la semana y hora te corresponde.
       </p>
 
-      <h2 class="pt-3">¿Cual es tu edad?</h2>
+      <h2 class="pt-3">¿Cuál es tu edad?</h2>
       <mat-form-field>
         <mat-label>Selecciona tu edad</mat-label>
         <mat-select
@@ -30,7 +30,7 @@
         </mat-select>
       </mat-form-field>
 
-      <h2 class="pt-3">Define tu género</h2>
+      <h2 class="pt-3">Selecciona tu género</h2>
       <mat-button-toggle-group
         [(ngModel)]="selectedGender"
         (change)="inputsChange()"
@@ -46,7 +46,7 @@
         *ngIf="selectedAge <= 60"
 
       >
-        <h2 class="mt-4">¿En que número termina tu cédula o pasaporte?</h2>
+        <h2 class="mt-4">¿Cuál es el último número de tu cédula o pasaporte?</h2>
 
         <mat-button-toggle-group
           [(ngModel)]="selectedNumber"

@@ -13,8 +13,8 @@ export class RulesService {
 
   // Rule by gender
   private __DAY_ALLOWED_BY_GENTER: IDaysAllowed[] = [
-    { gender: 'Hombre', dayAllowed: ['Martes', 'Jueves', 'Sábado'] }, // martes, jueves, sabado
-    { gender: 'Mujer', dayAllowed: ['Lunes', 'Miércoles', 'Viernes'] } // lunes, miercoles, viernes
+    { gender: 'Hombre', dayAllowed: ['martes', 'jueves'] }, // martes, jueves, sabado
+    { gender: 'Mujer', dayAllowed: ['lunes', 'miércoles', 'viernes'] } // lunes, miercoles, viernes
   ];
   // Rules
   private __GROUP_AGE: IRules[] = [
@@ -57,7 +57,7 @@ export class RulesService {
 
     return {
       schedule: this.__fixHoursAllowed(ruleByAge.strict, hoursOut),
-      days: this.__getWeekDayByGender(selectedGener)
+      days: this.__getWeekDayByGender(selectedGener).join(', ')
     };
   }
 
