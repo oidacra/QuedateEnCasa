@@ -18,6 +18,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { FooterComponent } from './components/footer/footer/footer.component';
 @NgModule({
   declarations: [AppComponent, ResultadoComponent, HoursPipe, FooterComponent],
@@ -30,7 +31,7 @@ import { FooterComponent } from './components/footer/footer/footer.component';
     MatButtonToggleModule,
     MatSelectModule, MatInputModule,
     MatFormFieldModule, MatToolbarModule,
-    MatCardModule,
+    MatCardModule, MatSnackBarModule,
 
     // Webworker
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),

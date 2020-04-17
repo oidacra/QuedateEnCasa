@@ -10,11 +10,11 @@
       alt="Responsive image"
     />
     <div class="p-4">
-      <p>
+      <h1>
         #QuédateEnCasa Panamá 🇵🇦. Aquí podrás verificar en qué horario te
         corresponde salir. Sólo llena los campos indicados y sabrás qué día de
         la semana y hora te corresponde.
-      </p>
+      </h1>
 
       <h2 class="pt-3">Selecciona tu rango de edad</h2>
       <mat-button-toggle-group [(ngModel)]="selectedGroup" (change)="resetAll()">
@@ -24,7 +24,7 @@
         >
       </mat-button-toggle-group>
 
-      <h2 class="pt-3">Selecciona tu género</h2>
+      <h2 class="pt-3">Selecciona tu sexo</h2>
       <mat-button-toggle-group
         [(ngModel)]="selectedGender"
         (change)="inputsChange()"

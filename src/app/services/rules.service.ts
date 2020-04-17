@@ -67,7 +67,7 @@ export class RulesService {
       hoursOut = _.first(ruleByAge.rules);
     }
 
-    if(hoursOut !== undefined){
+    if (hoursOut !== undefined) {
       return {
         schedule: this.__fixHoursAllowed(ruleByAge.strict, hoursOut),
         days: this.__getWeekDayByGender(selectedGender).join(', '),
@@ -75,7 +75,6 @@ export class RulesService {
     }
 
     return false;
-    
   }
 
   // Obtengo la regla segun edad y fin de cédula
