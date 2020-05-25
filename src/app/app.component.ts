@@ -1,16 +1,16 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 import * as _ from 'underscore';
 
 import { RulesService } from './services/rules.service';
-import { UpdateService } from './services/update.service';
+import { PwaService } from './services/pwa.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'QuedateApp';
 
   selectedGender: string;
@@ -27,12 +27,15 @@ export class AppComponent implements OnInit{
 
   ages = this.rulesService.getListRules();
 
-  constructor(private rulesService: RulesService, private updateService: UpdateService) {}
+  constructor(
+    private rulesService: RulesService,
+    private pwaService: PwaService
+  ) {}
 
-  ngOnInit(){
-
+  ngOnInit() {
     // Verifico si hay nueva versión del app
-    this.updateService.check();
+
+    this.pwaService.check();
   }
   inputsChange() {
     this.disabledNumbers = false;

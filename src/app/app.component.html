@@ -1,5 +1,8 @@
 <mat-toolbar color="primary">
-  <span>#QuédateEnCasa 🇵🇦🦠</span>
+  <mat-toolbar-row>
+    <span>#QuédateEnCasa 🇵🇦🦠</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar-row>
 </mat-toolbar>
 
 <main class="flex-grow">
@@ -17,11 +20,13 @@
       </h1>
 
       <h2 class="pt-3">Selecciona tu rango de edad</h2>
-      <mat-button-toggle-group [(ngModel)]="selectedGroup" (change)="resetAll()">
+      <mat-button-toggle-group
+        [(ngModel)]="selectedGroup"
+        (change)="resetAll()"
+      >
         <mat-button-toggle *ngFor="let val of ages" value="{{ val.value }}">{{
           val.label
-        }}</mat-button-toggle
-        >
+        }}</mat-button-toggle>
       </mat-button-toggle-group>
 
       <h2 class="pt-3">Selecciona tu sexo</h2>

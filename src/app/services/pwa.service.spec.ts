@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UpdateService } from './update.service';
+import { PwaService } from './pwa.service';
 
-describe('UpdateService', () => {
-  let service: UpdateService;
+describe('PwaService', () => {
+  let service: PwaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UpdateService);
+    service = TestBed.inject(PwaService);
   });
 
   it('should be created', () => {
